@@ -1,4 +1,4 @@
-export const getCadastro = () => {
+  const getCadastro = () => {
   const main = document.getElementById("root");
   const dadosHtml = `<form id="formulario">
     <h1>Novo Cliente</h1>
@@ -28,3 +28,26 @@ export const getCadastro = () => {
 
   main.innerHTML = dadosHtml;
 };
+
+const getListaClientesHtml = () => {
+  const main = document.getElementById("root");
+  const dadosHtml = `<section>
+  <h1>Lista de Clientes</h1>
+    <table>
+      <tr>Clientes</tr>
+      <tr>Modelo</tr>
+      <tr>Placa</tr>
+      <tr>Tipo</tr>
+      <tr>Observações</tr>
+      <tr><a>Novo</a></tr>
+    </table>
+  </section>` 
+
+  main.innerHTML = dadosHtml;
+  
+};
+
+export const view = {
+  getListaClientesHtml,
+  getCadastro
+}
