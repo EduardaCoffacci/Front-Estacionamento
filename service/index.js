@@ -10,54 +10,62 @@ const postVeiculo = (objetoCliente) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(objetoCliente),
-  }).then((response)=>{
-    if(response.status !== 200){
-        console.log(`Erro no servidor:  ${response.status}`)
+  }).then((response) => {
+    if (response.status !== 200) {
+      console.log(`Erro no servidor:  ${response.status}`);
+    } else {
+      alert(`Sucesso ao salvar : ${response.status} `);
     }
-    else{
-        alert(`Sucesso ao salvar : ${response.status} ` )
-    }
-  })
+  });
 };
 
 // ========================= Requisição GET==================
 
-const getVeiculo = ()=>{
-  return fetch(url + "/vehicles")
-  .then((response)=>{
-    if(response.status !== 200){
-        console.log(`Erro no servidor:  ${response.status}`)
+const getVeiculo = () => {
+  return fetch(url + "/vehicles").then((response) => {
+    if (response.status !== 200) {
+      console.log(`Erro no servidor:  ${response.status}`);
+    } else {
+      return response.json();
     }
-    else{
-      return response.json()
-    }
-  })
-}
+  });
+};
 
-// ========================= Requisição GET==================
+// ========================= Requisição PUT ==================
 const putVeiculo = (objetoCliente, id) => {
-  console.log("objetoCliente:", objetoCliente);
   return fetch(`${url}/vehicles/${id}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(objetoCliente),
-  }).then((response)=>{
-    if(response.status !== 200){
-        console.log(`Erro no servidor:  ${response.status}`)
+  }).then((response) => {
+    if (response.status !== 200) {
+      console.log(`Erro no servidor:  ${response.status}`);
+    } else {
+      return response.json();
     }
-    else{
-        return response.json()
-    }
-  })
+  });
 };
+// ========================= Requisição DELETE ==================
 
+const deletaVeiculo = (id) => {
+  return fetch(`${url}/vehicles/${id}`, {
+    method: "DELETE",
+  }).then((response) => {
+    if (response.status !== 200) {
+      console.log(`Erro no servidor:  ${response.status}`);
+    } else {
+      return response.json();
+    }
+  });
+};
 
 // ==================== Export =============
 
- export const service = {
+export const service = {
   postVeiculo,
   getVeiculo,
-  putVeiculo
- }
+  putVeiculo,
+  deletaVeiculo
+};

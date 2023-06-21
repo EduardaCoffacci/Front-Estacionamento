@@ -20,18 +20,17 @@ export const listaClienteComponente = () => {
   });
   const table = document.getElementById("tbody");
   table.addEventListener("click", (event) => {
-    const button = event.target.innerText
-    const id = event.target.id
-    if(button === "Editar"){
+    const button = event.target.innerText;
+    const id = event.target.id;
+    if (button === "Editar") {
       AtualizaComponent(id);
     }
-    if(button === "Excluir"){
-      console.log(button)
+    if (button === "Excluir") {
+      deletar(id);
     }
-    if(button === "Novo"){
-      console.log(button)
+    if (button === "Novo") {
+      console.log(button);
     }
-
   });
 };
 
@@ -55,4 +54,10 @@ const criarNovaLinha = (cliente, modelo, placa, tipo, observacoes, id) => {
     `;
   novaLinha.innerHTML = dadosHtml;
   return table.appendChild(novaLinha);
+};
+
+const deletar = (id) => {
+  service.deletaVeiculo(id).then(() => {
+    listaClienteComponente();
+  });
 };

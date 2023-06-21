@@ -25,9 +25,10 @@ export const AtualizaComponent = (idParametro) => {
       obervation: document.getElementById("observacoes").value,
     };
 
-    service.putVeiculo(atualizaCliente, idParametro);
-    cancelar()
-    listaClienteComponente();
+    service.putVeiculo(atualizaCliente, idParametro).then(() => {
+      cancelar();
+      listaClienteComponente();
+    });
   });
 };
 
@@ -39,8 +40,7 @@ const adicionaParametroNoInput = (objeto) => {
   document.getElementById("observacoes").value = objeto.observation;
 };
 
-
 const cancelar = () => {
-  const formulario = document.getElementById("formulario")
+  const formulario = document.getElementById("formulario");
   formulario.reset();
 };
