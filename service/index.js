@@ -31,6 +31,16 @@ const getVeiculo = () => {
   });
 };
 
+const getActivities = () => {
+  return fetch(url + "/activities").then((response) => {
+    if (response.status !== 200) {
+      console.log(`Erro no servidor:  ${response.status}`);
+    } else {
+      return response.json();
+    }
+  });
+};
+
 // ========================= Requisição PUT ==================
 const putVeiculo = (objetoCliente, id) => {
   return fetch(`${url}/vehicles/${id}`, {
@@ -67,5 +77,6 @@ export const service = {
   postVeiculo,
   getVeiculo,
   putVeiculo,
-  deletaVeiculo
+  deletaVeiculo,
+  getActivities
 };

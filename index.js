@@ -10,8 +10,12 @@ link.addEventListener("click", (event) => {
   switch (option) {
     case "Cadastro":
       cadastroComponente();
-      break;
+      break
     case "Clientes":
       listaClienteComponente();
+      break
+    case "Checkin":
+      window.location.href = "./checkin.html"
+      break
   }
-});
+})
