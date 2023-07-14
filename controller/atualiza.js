@@ -3,6 +3,15 @@ import { view } from "../view/index.js";
 import { listaClienteComponente } from "./lista-Clientes.js";
 
 export const AtualizaComponent = (idParametro) => {
+  const label = [];
+  service.getVeiculo().then((dados) => {
+    dados.forEach((element) => {
+      if (element.label !== null) {
+        label.push(element.label);
+      }
+    });
+  });
+
   view.getAtualizaCadastro();
   service.getVeiculo().then((dados) => {
     dados.forEach((element) => {
@@ -22,13 +31,17 @@ export const AtualizaComponent = (idParametro) => {
       model: document.getElementById("modelo").value,
       type: document.getElementById("tipo").value,
       label: document.getElementById("placa").value,
-      obervation: document.getElementById("observacoes").value,
-    };
+      obervation: document.getElementById("observacoes").value
+    }
 
-    service.putVeiculo(atualizaCliente, idParametro).then(() => {
-      cancelar();
-      listaClienteComponente();
-    });
+    if (label.includes(atualizaCliente.label)) {
+      return alert(`Essa placa : ${cadastroCliente.label} já existe no banco`);
+    } else {
+      service.putVeiculo(atualizaCliente, idParametro).then(() => {
+        cancelar();
+        listaClienteComponente();
+      });
+    }
   });
 };
 

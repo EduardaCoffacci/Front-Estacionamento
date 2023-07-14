@@ -1,6 +1,6 @@
 import { service } from "../service/index.js";
 import { view } from "../view/index.js";
-
+import { cadastroComponente } from "./cadastro.js";
 view.getCheckinHtml();
 
 let idCheckin = [];
@@ -72,7 +72,8 @@ main.addEventListener("click", (event) => {
     const select = document.getElementById("select");
     searchID(select.value);
   }
-  if (button === "Adicona Novo") {
+  if (button === "Adicionar Novo") {
+    cadastroComponente();
   }
 });
 
@@ -88,7 +89,7 @@ const searchID = (id) => {
 
 const checkinApi = (objeto) => {
   service.postCheckin(objeto.label).then((dados) => {
-    alert(dados.message)
+    alert(dados.message);
     window.location.reload();
   });
 };
