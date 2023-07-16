@@ -1,6 +1,7 @@
 import { service } from "../service/index.js";
 import { view } from "../view/index.js";
 import { cadastroComponente } from "./cadastro.js";
+import { checkoutComponent } from "./checkout.js";
 view.getCheckinHtml();
 
 let idCheckin = [];
@@ -66,7 +67,7 @@ main.addEventListener("click", (event) => {
   const button = event.target.innerText;
   const id = event.target.id;
   if (button === "Checkout") {
-    console.log("oi");
+    checkoutComponent(id)
   }
   if (button === "Checkin") {
     const select = document.getElementById("select");
