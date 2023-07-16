@@ -19,18 +19,17 @@ const postVeiculo = (objetoCliente) => {
   });
 };
 const postCheckin = (label) => {
-  console.log({label});
   return fetch(url + "/activities/checkin", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({label}),
+    body: JSON.stringify({ label }),
   }).then((response) => {
-    if(response.status !== 200) {
+    if (response.status !== 200) {
       console.log(`Erro no servidor:  ${response.status}`);
     } else {
-      return response.json()
+      return response.json();
     }
   });
 };
@@ -73,6 +72,22 @@ const putVeiculo = (objetoCliente, id) => {
     }
   });
 };
+
+const putCheckout = (objeto) => {
+  return fetch(url + "/activities/checkout", {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(objeto),
+  }).then((response) => {
+    if (response.status !== 200) {
+      console.log(`Erro no servidor:  ${response.status}`);
+    } else {
+      return response.json();
+    }
+  });
+};
 // ========================= Requisição DELETE ==================
 
 const deletaVeiculo = (id) => {
@@ -95,5 +110,6 @@ export const service = {
   putVeiculo,
   deletaVeiculo,
   getActivities,
-  postCheckin
+  postCheckin,
+  putCheckout,
 };

@@ -13,8 +13,9 @@ export const checkoutComponent = (idParametro) => {
     });
   });
 };
-
+let placa = ''
 const adicionaParametrosNaTela = (objeto) => {
+  placa = objeto.label
   const NovaLinha = document.getElementById("tbody");
   const dadosHtml = `
             <td>${objeto.owner}</td>
@@ -61,6 +62,12 @@ const adicionaParametrosNoInput = (element) => {
   const finalizar = document.getElementById('finalizar')
   finalizar.addEventListener('click', ()=>{
     const preco = document.getElementById('valorPagar').value
+    const stringPreco =  preco.split("") // split cria uma array de string
+    const objeto = {
+      label: placa,
+      price:Number(stringPreco[1])
+    }
+    checkoutAPI(objeto)
   })
 };
 
@@ -71,3 +78,9 @@ const calculaHora = (tempoEmMilissegundos) => {
   };
   return tempo;
 };
+
+const checkoutAPI= (objeto)=>{
+  service.putCheckout(objeto).then(()=>{
+    window.location.href= "../checkin.html"
+  })
+}

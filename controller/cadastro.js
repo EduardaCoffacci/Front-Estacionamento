@@ -30,5 +30,6 @@ export const cadastroComponente = () => {
     } else {
       service.postVeiculo(cadastroCliente); // função de requisição do tipo POST responsável por enviar as informações do cliente para o banco de dados.
     }
+    window.location.reload();
   });
 };
