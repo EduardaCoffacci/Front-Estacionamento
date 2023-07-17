@@ -1,4 +1,5 @@
 import { cadastroComponente } from "./controller/cadastro.js";
+import { FaturamentoComponente } from "./controller/faturamento.js";
 import { listaClienteComponente } from "./controller/lista-Clientes.js";
 
 const link = document.getElementById("link");
@@ -10,12 +11,15 @@ link.addEventListener("click", (event) => {
   switch (option) {
     case "Cadastro":
       cadastroComponente();
-      break
+      break;
     case "Clientes":
       listaClienteComponente();
-      break
+      break;
     case "Checkin":
-      window.location.href = "./checkin.html"
-      break
+      window.location.href = "./checkin.html";
+      break;
+    case "Faturamento":
+      FaturamentoComponente();
+      break;
   }
-})
+});

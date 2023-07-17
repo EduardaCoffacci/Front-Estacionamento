@@ -148,10 +148,33 @@ const getCheckoutHtml = () => {
   `;
   main.innerHTML= dadosHmlt
 };
+const getFaturamentoHtml = ()=>{
+  const main = document.getElementById('root')
+  const dadosHtml = `
+  <section>
+  <h1>Lista de faturamento</h1>
+  <table class='tabela'>
+    <thead>
+      <tr>
+        <th>Qtd Veiculos</th>
+        <th>Total</th>
+        <th>dia</th>
+     </tr>
+    </thead>
+    <tbody id='tbody'></tbody>
+  </table>
+  <div class='grafico'>
+    <div id='piechart_3d'></div>
+  </div>
+  </section>
+  `
+  main.innerHTML = dadosHtml
+}
 export const view = {
   getListaClientesHtml,
   getCadastro,
   getAtualizaCadastro,
   getCheckinHtml,
-  getCheckoutHtml
+  getCheckoutHtml,
+  getFaturamentoHtml
 };
