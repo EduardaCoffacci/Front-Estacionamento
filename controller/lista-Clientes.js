@@ -1,8 +1,12 @@
 import { service } from "../service/index.js";
 import { view } from "../view/index.js";
 import { AtualizaComponent } from "./atualiza.js";
+import { cadastroComponente} from "./cadastro.js";
 export const listaClienteComponente = () => {
-  view.getListaClientesHtml();
+
+  view.getSpinner();
+  setTimeout(()=> {
+    view.getListaClientesHtml();
 
   service.getVeiculo().then((dados) => {
     dados.forEach((element) => {
@@ -29,9 +33,10 @@ export const listaClienteComponente = () => {
       deletar(id);
     }
     if (button === "Novo") {
-      console.log(button);
+      cadastroComponente()
     }
   });
+},600)
 };
 
 const criarNovaLinha = (cliente, modelo, placa, tipo, observacoes, id) => {
@@ -45,8 +50,8 @@ const criarNovaLinha = (cliente, modelo, placa, tipo, observacoes, id) => {
       <td class="none">${observacoes}</td>
       <td>
         <div class="lista-btn">
-          <a id="${id}" class="btn-link editar">Editar<a/>
-          <a id="${id}" class="btn-link type="button">Excluir<a/>
+          <a id="${id}" class="class="lista-cliente__table__button"">Editar<a/>
+          <a id="${id}" class="class="lista-cliente__table__button">Excluir<a/>
         </div>
       </td>
 

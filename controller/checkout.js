@@ -2,20 +2,23 @@ import { service } from "../service/index.js";
 import { view } from "../view/index.js";
 
 export const checkoutComponent = (idParametro) => {
-  view.getCheckoutHtml();
+  view.getSpinner();
+  setTimeout(() => {
+    view.getCheckoutHtml();
 
-  service.getVeiculo().then((dados) => {
-    dados.forEach((element) => {
-      if (element.id == idParametro) {
-        adicionaParametrosNaTela(element);
-        buscarRegistro(idParametro);
-      }
+    service.getVeiculo().then((dados) => {
+      dados.forEach((element) => {
+        if (element.id == idParametro) {
+          adicionaParametrosNaTela(element);
+          buscarRegistro(idParametro);
+        }
+      });
     });
-  });
+  }, 600);
 };
-let placa = ''
+let placa = "";
 const adicionaParametrosNaTela = (objeto) => {
-  placa = objeto.label
+  placa = objeto.label;
   const NovaLinha = document.getElementById("tbody");
   const dadosHtml = `
             <td>${objeto.owner}</td>
@@ -41,8 +44,8 @@ const adicionaParametrosNoInput = (element) => {
   const checkout = new Date();
   const tempo = checkout - checkin;
   const hora = calculaHora(tempo);
-  const totalApagar = (hora.minutos + (hora.horas * 60)) * valorMinuto;
-  console.log(totalApagar);
+  const totalApagar = (hora.minutos + hora.horas * 60) * valorMinuto;
+  
   const inputHora = document.getElementById("totalHora");
   const inputTotal = document.getElementById("valorPagar");
 
@@ -59,16 +62,16 @@ const adicionaParametrosNoInput = (element) => {
   } else {
     inputTotal.value = `R$: ${totalApagar.toFixed(2)}`;
   }
-  const finalizar = document.getElementById('finalizar')
-  finalizar.addEventListener('click', ()=>{
-    const preco = document.getElementById('valorPagar').value
-    const stringPreco =  preco.split("") // split cria uma array de string
+  const finalizar = document.getElementById("finalizar");
+  finalizar.addEventListener("click", () => {
+    const preco = document.getElementById("valorPagar").value;
+    const stringPreco = preco.split(""); // split cria uma array de string
     const objeto = {
       label: placa,
-      price:Number(stringPreco[1])
-    }
-    checkoutAPI(objeto)
-  })
+      price: Number(stringPreco[1]),
+    };
+    checkoutAPI(objeto);
+  });
 };
 
 const calculaHora = (tempoEmMilissegundos) => {
@@ -79,8 +82,8 @@ const calculaHora = (tempoEmMilissegundos) => {
   return tempo;
 };
 
-const checkoutAPI= (objeto)=>{
-  service.putCheckout(objeto).then(()=>{
-    window.location.href= "../checkin.html"
-  })
-}
+const checkoutAPI = (objeto) => {
+  service.putCheckout(objeto).then(() => {
+    window.location.href = "../checkin.html";
+  });
+};
